@@ -529,3 +529,33 @@ select.form-input-3d {
     line-height: 1.4;
   }
 }
+
+/* Sirf Mobile ke liye rules (width 768px se kam) */
+@media screen and (max-width: 768px) {
+
+  /* Container ko full width karo aur side mein jagah chhod do */
+  .container,
+  .main-div,
+  .login-wrapper {
+    width: 95% !important;
+    margin: 0 auto;
+    padding: 10px;
+  }
+
+  /* Agar button aur input chote dikh rahe hain */
+  input,
+  button {
+    width: 100% !important;
+    /* Pura faila do */
+    font-size: 16px;
+    /* Text bada karo */
+    margin-bottom: 10px;
+    /* Beech mein gap do */
+  }
+
+  /* Agar cheezein bagal-bagal (row) mein hain, to unhe upar-neeche (column) karo */
+  .row,
+  .d-flex {
+    flex-direction: column !important;
+  }
+}
