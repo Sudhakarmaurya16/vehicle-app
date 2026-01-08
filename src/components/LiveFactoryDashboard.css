@@ -1,0 +1,253 @@
+/* Live Factory Dashboard Styles */
+.lfd-container {
+    background-color: #000;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    padding: 10px;
+    border: 4px solid #444;
+    max-width: 100%;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+.lfd-header {
+    display: grid;
+    grid-template-columns: 180px 1fr 180px;
+    gap: 5px;
+}
+
+/* Sidebars */
+.lfd-sidebar {
+    background: #e0e0e0;
+    color: black;
+    text-align: center;
+    padding: 15px 5px;
+    border: 2px solid #666;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lfd-logo-circle {
+    width: 100px;
+    height: 100px;
+    background: green;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 10px;
+    border: 3px solid white;
+}
+
+.lfd-photo-rect {
+    width: 140px;
+    height: 160px;
+    background: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #999;
+    margin-bottom: 10px;
+}
+
+.lfd-brand {
+    color: blue;
+    margin: 5px 0;
+    font-size: 1.2rem;
+}
+
+.lfd-sub-brand {
+    color: #000;
+    margin: 0;
+}
+
+.lfd-md-name {
+    color: purple;
+    margin: 5px 0;
+}
+
+.lfd-md-title {
+    color: blue;
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+/* Main Center Area */
+.lfd-main {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.lfd-top-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background: black;
+    border-bottom: 2px solid yellow;
+    margin-bottom: 2px;
+}
+
+.lfd-info-box {
+    color: #0ff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #333;
+    padding: 5px;
+    text-shadow: 0 0 5px #0ff;
+    /* Neon Glow */
+}
+
+.lfd-section-title {
+    background: #eebbbb;
+    color: #8b0000;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    padding: 3px;
+    border: 1px solid #555;
+}
+
+.mt-2 {
+    margin-top: 5px;
+}
+
+/* Grids */
+.lfd-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: #222;
+}
+
+.lfd-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+}
+
+.lfd-grid-8 {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 1px;
+}
+
+.lfd-vehicle-grid {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr 1fr 100px;
+    gap: 2px;
+    border: 2px solid yellow;
+}
+
+.lfd-grid-5 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    background: black;
+    border: 2px solid yellow;
+}
+
+/* Boxes & Values */
+.lfd-box {
+    background: black;
+    text-align: center;
+    border: 1px solid yellow;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.bg-green {
+    background: #004d40;
+}
+
+.bg-blue {
+    background: #002244;
+}
+
+.big-border {
+    border-top: 2px solid yellow;
+    border-bottom: 2px solid yellow;
+}
+
+.lfd-label {
+    background: #bcaaa4;
+    color: black;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 2px;
+}
+
+.lfd-label-blue {
+    background: #ccccff;
+    color: blue;
+    font-weight: bold;
+    padding: 2px;
+}
+
+.lfd-label-gray {
+    background: #ccc;
+    color: #333;
+    font-weight: bold;
+    padding: 2px;
+}
+
+.lfd-header-small {
+    background: #ccc;
+    color: black;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.lfd-value {
+    font-size: 1.6rem;
+    color: #0ff;
+    font-weight: bold;
+    padding: 5px;
+    text-shadow: 0 0 3px #0ff;
+}
+
+.lfd-value-lg {
+    font-size: 2.5rem;
+    color: #0ff;
+    font-weight: bold;
+    padding: 5px;
+    text-shadow: 0 0 5px #0ff;
+}
+
+.lfd-value-sm {
+    font-size: 1.1rem;
+    color: #0ff;
+    font-weight: bold;
+    padding: 5px;
+}
+
+/* Responsive Mobile Support */
+@media (max-width: 900px) {
+    .lfd-header {
+        grid-template-columns: 1fr;
+    }
+
+    /* Stack vertically */
+    .lfd-sidebar {
+        display: none;
+    }
+
+    /* Hide sidebars on mobile to save space */
+    .lfd-grid-8 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Break hourly into 2 rows */
+    .lfd-vehicle-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .lfd-grid-5 {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
