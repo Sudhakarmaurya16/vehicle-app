@@ -5,21 +5,30 @@ require("dotenv").config();
 
 const app = express();
 
+/* ===================== MIDDLEWARE ===================== */
 app.use(cors());
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
-// --- DATABASE CONNECTION FIX ---
+/* ===================== ROOT ROUTE (FIX) ===================== */
+// ❌ Cannot GET / error ka fix
+app.get("/", (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    message: "🚀 Vehicle Backend API is running successfully",
+    environment: process.env.NODE_ENV || "development",
+  });
+});
 
-// ❌ Maine purana hardcoded PASSWORD aur MONGO_URI hata diya hai.
-// ✅ Ab hum process.env.MONGO_URI use karenge taaki Render ki settings kaam karein.
-
+/* ===================== DATABASE CONNECTION ===================== */
 mongoose
-  .connect(process.env.MONGO_URI) // <-- Ye sabse important change hai
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Atlas Connected Successfully"))
-  .catch((err) => console.log("❌ Connection Error:", err));
+  .catch((err) => {
+    console.error("❌ MongoDB Connection Error:", err.message);
+  });
 
-// --- REST OF THE CODE ---
+/* ===================== ROUTES ===================== */
 const userRoute = require("./routes/users");
 const recordRoute = require("./routes/records");
 const masterRoute = require("./routes/master");
@@ -28,8 +37,17 @@ app.use("/api/users", userRoute);
 app.use("/api/records", recordRoute);
 app.use("/api/master", masterRoute);
 
-// Render par PORT dynamic hota hai, isliye process.env.PORT lagana zaroori hai
+/* ===================== 404 HANDLER ===================== */
+app.use((req, res) => {
+  res.status(404).json({
+    status: "ERROR",
+    message: "Route not found",
+  });
+});
+
+/* ===================== SERVER ===================== */
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
   console.log(`🔥 Server running on port ${PORT}`);
 });

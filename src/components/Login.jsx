@@ -28,7 +28,7 @@ const Login = ({ onLogin }) => {
   // ✅ Ye function missing tha, maine add kar diya hai
   const createInitialAdmin = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/users/add", {
+      const response = await fetch("https://vehicle-backend-seow.onrender.com/api/users/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -61,7 +61,7 @@ const Login = ({ onLogin }) => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/users/login", {
+      const response = await fetch("https://vehicle-backend-seow.onrender.com/api/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
