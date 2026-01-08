@@ -11,13 +11,11 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 // --- DATABASE CONNECTION FIX ---
 
-// ✅ Password ko quotes " " ke andar likhna zaroori hai
-const PASSWORD = encodeURIComponent("mellbro@123"); 
-
-const MONGO_URI = `mongodb+srv://mellbro:${PASSWORD}@cluster0.hnu7srq.mongodb.net/sugar_factory_db?appName=Cluster0`;
+// ❌ Maine purana hardcoded PASSWORD aur MONGO_URI hata diya hai.
+// ✅ Ab hum process.env.MONGO_URI use karenge taaki Render ki settings kaam karein.
 
 mongoose
-  .connect(MONGO_URI)
+  .connect(process.env.MONGO_URI) // <-- Ye sabse important change hai
   .then(() => console.log("✅ MongoDB Atlas Connected Successfully"))
   .catch((err) => console.log("❌ Connection Error:", err));
 
@@ -30,7 +28,8 @@ app.use("/api/users", userRoute);
 app.use("/api/records", recordRoute);
 app.use("/api/master", masterRoute);
 
-const PORT = 5000;
+// Render par PORT dynamic hota hai, isliye process.env.PORT lagana zaroori hai
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`🔥 Server running on http://localhost:${PORT}`);
+  console.log(`🔥 Server running on port ${PORT}`);
 });
