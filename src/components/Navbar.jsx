@@ -1,67 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
-import Logo from "../assets/image.png"; // ✅ Import Logo
+import Logo from "../assets/image.png";
 
 const Navbar = ({ user, onLogout, onNavigate }) => {
+  const [isOpen, setIsOpen] = useState(false); // Mobile Menu State
+
   return (
     <nav className="navbar">
-      {/* ✅ Logo aur Text Container */}
-      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-        {/* 🌟 LOGO WITH 3D EFFECT & CIRCLE */}
-        <img
-          src={Logo}
-          alt="Mellbro Sugars Logo"
-          style={{
-            height: "50px", // Height
-            width: "50px", // Width (Equal to make it perfect circle)
-            borderRadius: "50%", // Circle Shape
-            objectFit: "cover", // Image fit rahegi, kategi nahi
-            border: "2px solid #fff", // White border for clean look
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)", // 🔥 3D Shadow Effect
-            cursor: "pointer",
-          }}
-        />
-
-        <div className="navbar-brand">MELLBRO SUGARS PRIVATE LIMITED</div>
+      {/* --- LEFT SIDE: LOGO & NAME --- */}
+      <div className="navbar-brand-wrapper">
+        <img src={Logo} alt="Mellbro Sugars Logo" className="navbar-logo" />
+        <div className="navbar-title">MELLBRO SUGARS PVT LTD</div>
       </div>
 
-      {/* Right Side */}
+      {/* --- HAMBURGER ICON (Mobile Only) --- */}
       {user && (
-        <div
-          className="navbar-right"
-          style={{ display: "flex", alignItems: "center", gap: "15px" }}
-        >
-          {/* Navigation Links (Only for Centers, not Admin) */}
+        <div className="menu-icon" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? "✖" : "☰"}
+        </div>
+      )}
+
+      {/* --- RIGHT SIDE: MENU ITEMS --- */}
+      {user && (
+        <div className={`navbar-menu ${isOpen ? "active" : ""}`}>
+          {/* 1. Center User Links */}
           {user.role !== "admin" && (
             <>
               <button
-                onClick={() => onNavigate && onNavigate("dashboard")}
-                style={{
-                  background: "transparent",
-                  border: "1px solid rgba(255,255,255,0.5)",
-                  color: "white",
-                  padding: "6px 12px",
-                  borderRadius: "20px",
-                  cursor: "pointer",
-                  fontSize: "0.9rem",
-                  fontWeight: "bold",
+                className="nav-btn btn-outline"
+                onClick={() => {
+                  onNavigate && onNavigate("dashboard");
+                  setIsOpen(false);
                 }}
               >
                 🏠 Dashboard
               </button>
 
               <button
-                onClick={() => onNavigate && onNavigate("transfer")}
-                style={{
-                  background: "#f39c12", // Orange color for attention
-                  border: "none",
-                  color: "white",
-                  padding: "6px 15px",
-                  borderRadius: "20px",
-                  cursor: "pointer",
-                  fontSize: "0.9rem",
-                  fontWeight: "bold",
-                  boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
+                className="nav-btn btn-orange"
+                onClick={() => {
+                  onNavigate && onNavigate("transfer");
+                  setIsOpen(false);
                 }}
               >
                 ⇄ Transfer Vehicle
@@ -69,24 +48,18 @@ const Navbar = ({ user, onLogout, onNavigate }) => {
             </>
           )}
 
-          {/* User Badge */}
+          {/* 2. User Badge */}
           <span className="user-badge">
             {user.role === "admin" ? "👑 Admin Panel" : `🏭 ${user.name}`}
           </span>
 
-          {/* Logout Button */}
+          {/* 3. Logout Button */}
           <button
-            className="logout-btn"
-            style={{
-              background: "#e74c3c",
-              color: "white",
-              border: "none",
-              padding: "8px 15px",
-              borderRadius: "10px",
-              cursor: "pointer",
-              fontWeight: "bold",
+            className="nav-btn btn-red"
+            onClick={() => {
+              onLogout();
+              setIsOpen(false);
             }}
-            onClick={onLogout}
           >
             Logout
           </button>
