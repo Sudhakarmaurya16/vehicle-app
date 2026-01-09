@@ -600,6 +600,7 @@ const AdminDashboard = ({ onLogout }) => {
         {/* CIRCLE STATS TABLE */}
         <div className="form-card" style={{ marginBottom: "20px" }}>
           <h3 style={{ margin: "0 0 10px 0" }}>🏢 Circle-wise Statistics</h3>
+          {/* ✅ 1. SLIDER HERE (Already present) */}
           <div
             className="table-container"
             style={{ maxHeight: "300px", overflowY: "auto" }}
@@ -732,9 +733,14 @@ const AdminDashboard = ({ onLogout }) => {
           </div>
         </div>
 
+        {/* MANAGE CENTERS */}
         <div className="form-card">
           <h3>🔐 Manage Centers</h3>
-          <div className="table-container">
+          {/* ✅ 2. SLIDER ADDED HERE */}
+          <div
+            className="table-container"
+            style={{ maxHeight: "300px", overflowY: "auto" }}
+          >
             <table>
               <thead>
                 <tr>
@@ -952,9 +958,14 @@ const AdminDashboard = ({ onLogout }) => {
               </button>
             </div>
           </div>
+          {/* ✅ 3. SLIDER ADDED HERE */}
           <div
             className="table-container"
-            style={{ maxHeight: "300px", marginTop: "10px" }}
+            style={{
+              maxHeight: "300px",
+              overflowY: "auto",
+              marginTop: "10px",
+            }}
           >
             {todaysDispatchRecords.length === 0 ? (
               <p style={{ textAlign: "center" }}>No records</p>
@@ -1040,7 +1051,11 @@ const AdminDashboard = ({ onLogout }) => {
           <h3 style={{ color: "#e67e22" }}>
             🏭 Master Dispatch Logs ({loadingRecords.length})
           </h3>
-          <div className="table-container">
+          {/* ✅ 4. SLIDER ADDED HERE (Height 400px for larger lists) */}
+          <div
+            className="table-container"
+            style={{ maxHeight: "400px", overflowY: "auto" }}
+          >
             <table>
               <thead>
                 <tr style={{ background: "#e8f8f5" }}>
@@ -1121,7 +1136,11 @@ const AdminDashboard = ({ onLogout }) => {
           <h3 style={{ color: "#27ae60" }}>
             🚜 Master Arrival Logs ({arrivalRecords.length})
           </h3>
-          <div className="table-container">
+          {/* ✅ 5. SLIDER ADDED HERE (Height 400px for larger lists) */}
+          <div
+            className="table-container"
+            style={{ maxHeight: "400px", overflowY: "auto" }}
+          >
             <table>
               <thead>
                 <tr style={{ background: "#e8f8f5" }}>
