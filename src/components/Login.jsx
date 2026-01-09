@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./Navbar";
+// ❌ Navbar hata diya (App.js wala dikhega)
 import { getUsers } from "../utils/dataManager";
 import { toast } from "react-toastify";
 
@@ -24,34 +24,9 @@ const Login = ({ onLogin }) => {
     fetchUsers();
   }, []);
 
-  // --- 2. TEMPORARY: CREATE ADMIN USER (Run Once) ---
-  // ✅ Ye function missing tha, maine add kar diya hai
-  const createInitialAdmin = async () => {
-    try {
-      const response = await fetch("https://vehicle-backend-seow.onrender.com/api/users/add", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: "admin",
-          name: "Super Admin",
-          password: "admin",
-          role: "admin",
-        }),
-      });
+  // 🔒 SECURITY FIX: createInitialAdmin function hata diya gaya hai.
 
-      if (response.ok) {
-        toast.success("Admin User Created! Page Refreshing...");
-        setTimeout(() => window.location.reload(), 1500);
-      } else {
-        toast.error("Admin already exists or Error.");
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("Server connection failed.");
-    }
-  };
-
-  // --- 3. LOGIN HANDLER ---
+  // --- 2. LOGIN HANDLER ---
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -61,14 +36,17 @@ const Login = ({ onLogin }) => {
     }
 
     try {
-      const response = await fetch("https://vehicle-backend-seow.onrender.com/api/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          userId: selectedUserId,
-          password: password,
-        }),
-      });
+      const response = await fetch(
+        "https://vehicle-backend-seow.onrender.com/api/users/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: selectedUserId,
+            password: password,
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -86,7 +64,7 @@ const Login = ({ onLogin }) => {
 
   return (
     <div>
-      <Navbar />
+      {/* Navbar yahan se hata diya hai taaki double na dikhe */}
 
       <div className="login-container">
         <div className="login-card-3d">
@@ -135,25 +113,7 @@ const Login = ({ onLogin }) => {
               Access Dashboard
             </button>
 
-            {/* --- TEMPORARY BUTTON --- */}
-            {availableUsers.length === 0 && (
-              <button
-                type="button"
-                onClick={createInitialAdmin}
-                style={{
-                  marginTop: "20px",
-                  width: "100%",
-                  background: "#e74c3c",
-                  color: "white",
-                  padding: "10px",
-                  border: "none",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                }}
-              >
-                ⚠️ First Time? Create Admin
-              </button>
-            )}
+            {/* 🔒 SECURITY FIX: Admin Create Button hata diya gaya hai */}
           </form>
         </div>
       </div>
